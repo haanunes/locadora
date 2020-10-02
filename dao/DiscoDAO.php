@@ -1,6 +1,6 @@
 <?php
-require_once "../bd/Conexao.php";
-require_once "../vo/Disco.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/Disco.php";
 class DiscoDAO {
     
     public static function inserir(Disco $obj) {
