@@ -1,7 +1,6 @@
 <?php
-
-require_once "../bd/Conexao.php";
-require_once "../vo/Permissao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/Permissao.php";
 class PermissaoDAO {
 
     public static function inserir($obj) {

@@ -1,7 +1,7 @@
 <?php
 
-require_once "../bd/Conexao.php";
-require_once "../vo/UsuarioPermissao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/UsuarioPermissao.php";
 
 class UsuarioPermissaoDAO {
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'protecao.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/DiscoDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/FluxoCaixaDAO.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -15,44 +15,46 @@ and open the template in the editor.
         <?php require 'includeHead.php'; ?>
         <script type="text/javascript">
         function prepararModal(titulo,id){
-            document.getElementById("corpoModal").innerHTML="Realmente deseja remover o disco com título <b>"+titulo+"</b>";
+            document.getElementById("corpoModal").innerHTML="Realmente deseja remover o fluxoCaixa com a descrição <b>"+titulo+"</b>";
             document.getElementById("idParaDeletar").value=id;
         }
         function redirecionarParaRemocao(){
-            window.location='http://<?php echo $_SERVER['HTTP_HOST'] ?>/locadora/controle/delDisco.php?id='+document.getElementById("idParaDeletar").value;
+            window.location='http://<?php echo $_SERVER['HTTP_HOST'] ?>/locadora/controle/delFluxoCaixa.php?id='+document.getElementById("idParaDeletar").value;
         }
         </script>
     </head>
     <body>
         <?php require 'menu.php'; ?>
         <div class="container">
-            <h2 class="titulo">Listar Disco</h2>
+            <h2 class="titulo">Listar FluxoCaixa</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Títutlo</th>
-                        <th scope="col">Faixa Etária</th>
-                        <th scope="col">Preço</th>
-                        <th scope="col">Artista</th>
-                        <th scope="col">Ano Lançamento</th>
+                        <th scope="col">Data de Vencimento</th>
+                        <th scope="col">Data de Pagamento</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Aluguel</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Situação</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $lista = DiscoDAO::getListAll();
+                    $lista = FluxoCaixaDAO::getListAll();
                     foreach ($lista as $obj) {
                         echo "<tr>
-                        <td>" . $obj->getId() . "</td>
-                        <td>" . $obj->getTitulo() . "</td>
-                        <td>" . $obj->getFaixaEtaria() . "</td>
-                        <td>" . $obj->getPreco() . "</td>
-                        <td>" . $obj->getArtista() . "</td>
-                        <td>" . $obj->getAnoLancamento() . "</td>
+                        <td>" . $obj->getDataPrevistaPagamento() . "</td>
+                        <td>" . $obj->getDataPagamento() . "</td>
+                        <td>" . $obj->getDescricao() . "</td>
+                        <td>" . $obj->getIdAluguel() . "</td>
+                        <td>" . $obj->getValor() . "</td>
+                        <td>" . $obj->getTipo() . "</td>
+                        <td>" . $obj->getSituacao() . "</td>
                         <td>
-                            <button type='button' class='btn btn-outline-warning' onclick=\"window.location='http://" . $_SERVER['HTTP_HOST'] . "/locadora/add-disco.php?id=" . $obj->getId() . "'\">Editar</button>
-                            <button type='button' class='btn btn-outline-danger' data-toggle='modal' data-target='#exampleModal' onclick=\"prepararModal('".$obj->getTitulo()."'," . $obj->getId() . ")\">Remover</button>
+                            <button type='button' class='btn btn-outline-warning' onclick=\"window.location='http://" . $_SERVER['HTTP_HOST'] . "/locadora/add-fluxoCaixa.php?id=" . $obj->getId() . "'\">Editar</button>
+                            <button type='button' class='btn btn-outline-danger' data-toggle='modal' data-target='#exampleModal' onclick=\"prepararModal('".$obj->getDescricao()."'," . $obj->getId() . ")\">Remover</button>
                             
                         </td>
                     </tr>";

@@ -1,6 +1,6 @@
 <?php
-require_once "../bd/Conexao.php";
-require_once "../vo/Aluguel.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/Aluguel.php";
 class AluguelDAO {
     
     public static function inserir(Aluguel $obj) {

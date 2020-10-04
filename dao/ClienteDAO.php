@@ -1,6 +1,6 @@
 <?php
-require_once "../bd/Conexao.php";
-require_once "../vo/Cliente.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/Cliente.php";
 class ClienteDAO {
     
     public static function inserir(Cliente $obj) {

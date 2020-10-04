@@ -1,11 +1,11 @@
 <?php
-require_once "../bd/Conexao.php";
-require_once "../vo/FluxoCaixa.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/FluxoCaixa.php";
 class FluxoCaixaDAO {
     
     public static function inserir(FluxoCaixa $obj) {
         try {
-            $sql = "insert into cliente (dataPagamento,dataPrevistaPagamento,descricao,idAluguel,valor,tipo,situacao) values (:dataPagamento,:dataPrevistaPagamento,:descricao,:idAluguel,:valor,:tipo,:situacao)";
+            $sql = "insert into fluxoCaixa (dataPagamento,dataPrevistaPagamento,descricao,idAluguel,valor,tipo,situacao) values (:dataPagamento,:dataPrevistaPagamento,:descricao,:idAluguel,:valor,:tipo,:situacao)";
             $p_sql = Conexao::getInstance()->prepare($sql);
             $p_sql->bindValue(":dataPagamento", $obj->getDataPagamento());
             $p_sql->bindValue(":dataPrevistaPagamento", $obj->getDataPrevistaPagamento());
@@ -14,7 +14,8 @@ class FluxoCaixaDAO {
             $p_sql->bindValue(":valor", $obj->getValor());
             $p_sql->bindValue(":tipo", $obj->getTipo());
             $p_sql->bindValue(":situacao", $obj->getSituacao());
-            return $p_sql->execute();
+            $p_sql->execute();
+            return  Conexao::getInstance()->lastInsertId();
         } catch (Exception $ex) {
             echo "Erro: Não foi possível inserir. " . $ex->getMessage();
         }
@@ -22,7 +23,7 @@ class FluxoCaixaDAO {
 
     public static function atualizar($obj) {
         try {
-            $sql = "update cliente set dataPagamento= :dataPagamento,dataPrevistaPagamento= :dataPrevistaPagamento ,descricao = :descricao,idAluguel = :idAluguel,valor=:valor,tipo=:tipo,situacao=:situacao where id = :id";
+            $sql = "update fluxoCaixa set dataPagamento= :dataPagamento,dataPrevistaPagamento= :dataPrevistaPagamento ,descricao = :descricao,idAluguel = :idAluguel,valor=:valor,tipo=:tipo,situacao=:situacao where id = :id";
             $p_sql = Conexao::getInstance()->prepare($sql);
              $p_sql->bindValue(":dataPagamento", $obj->getDataPagamento());
             $p_sql->bindValue(":dataPrevistaPagamento", $obj->getDataPrevistaPagamento());
@@ -40,7 +41,7 @@ class FluxoCaixaDAO {
 
     public static function remover($id) {
         try {
-            $sql = "delete from cliente where id = :id ";
+            $sql = "delete from fluxoCaixa where id = :id ";
             $p_sql = Conexao::getInstance()->prepare($sql);
             $p_sql->bindValue(":id", $id);
             return $p_sql->execute();
@@ -51,7 +52,7 @@ class FluxoCaixaDAO {
 
     public static function getById($id) {
         try {
-            $sql = "select * from cliente where id = :id ";
+            $sql = "select * from fluxoCaixa where id = :id ";
             $p_sql = Conexao::getInstance()->prepare($sql);
             $p_sql->bindValue(":id", $id);
             $p_sql->execute();
@@ -68,7 +69,7 @@ class FluxoCaixaDAO {
 
     public static function getListAll() {
         try {
-            $sql = "select * from cliente";
+            $sql = "select * from fluxoCaixa";
             $p_sql = Conexao::getInstance()->prepare($sql);
             $p_sql->execute();
             $dados = $p_sql->fetchAll(PDO::FETCH_OBJ);
@@ -84,7 +85,7 @@ class FluxoCaixaDAO {
     
     public static function getList($sqlWhere,$parametros){
         try {
-            $sql = "select * from cliente ".$sqlWhere;
+            $sql = "select * from fluxoCaixa ".$sqlWhere;
             $p_sql = Conexao::getInstance()->prepare($sql);
             
             $i=1;

@@ -1,6 +1,6 @@
 <?php
-require_once "../bd/Conexao.php";
-require_once "../vo/Usuario.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/bd/Conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/locadora/vo/Usuario.php";
 class UsuarioDAO {
     
     public static function inserir(Usuario $obj) {
@@ -11,7 +11,8 @@ class UsuarioDAO {
             $p_sql->bindValue(":login", $obj->getLogin());
             $p_sql->bindValue(":email", $obj->getEmail());
             $p_sql->bindValue(":senha", $obj->getSenha());
-            return $p_sql->execute();
+            $p_sql->execute();
+            return Conexao::getInstance()->lastInsertId();
         } catch (Exception $ex) {
             echo "Erro: Não foi possível inserir. " . $ex->getMessage();
         }

@@ -1,6 +1,6 @@
 <?php
 require_once 'protecao.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/DiscoDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/ClienteDAO.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -15,44 +15,41 @@ and open the template in the editor.
         <?php require 'includeHead.php'; ?>
         <script type="text/javascript">
         function prepararModal(titulo,id){
-            document.getElementById("corpoModal").innerHTML="Realmente deseja remover o disco com título <b>"+titulo+"</b>";
+            document.getElementById("corpoModal").innerHTML="Realmente deseja remover o cliente  <b>"+titulo+"</b>";
             document.getElementById("idParaDeletar").value=id;
         }
         function redirecionarParaRemocao(){
-            window.location='http://<?php echo $_SERVER['HTTP_HOST'] ?>/locadora/controle/delDisco.php?id='+document.getElementById("idParaDeletar").value;
+            window.location='http://<?php echo $_SERVER['HTTP_HOST'] ?>/locadora/controle/delCliente.php?id='+document.getElementById("idParaDeletar").value;
         }
         </script>
     </head>
     <body>
         <?php require 'menu.php'; ?>
         <div class="container">
-            <h2 class="titulo">Listar Disco</h2>
+            <h2 class="titulo">Listar Cliente</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Títutlo</th>
-                        <th scope="col">Faixa Etária</th>
-                        <th scope="col">Preço</th>
-                        <th scope="col">Artista</th>
-                        <th scope="col">Ano Lançamento</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Data de Nascimento</th>
+                        <th scope="col">Endereço</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $lista = DiscoDAO::getListAll();
+                    $lista = ClienteDAO::getListAll();
                     foreach ($lista as $obj) {
                         echo "<tr>
-                        <td>" . $obj->getId() . "</td>
-                        <td>" . $obj->getTitulo() . "</td>
-                        <td>" . $obj->getFaixaEtaria() . "</td>
-                        <td>" . $obj->getPreco() . "</td>
-                        <td>" . $obj->getArtista() . "</td>
-                        <td>" . $obj->getAnoLancamento() . "</td>
+                        <td>" . $obj->getNome() . "</td>
+                        <td>" . $obj->getCpf() . "</td>
+                        <td>" . $obj->getDataNascimento() . "</td>
+                        <td>" . $obj->getRua() . ",". $obj->getNumero()." - ". $obj->getBairro()." - ". $obj->getCidade().
+                                " - ". $obj->getUf()." - ".  $obj->getCep()."</td>
                         <td>
-                            <button type='button' class='btn btn-outline-warning' onclick=\"window.location='http://" . $_SERVER['HTTP_HOST'] . "/locadora/add-disco.php?id=" . $obj->getId() . "'\">Editar</button>
-                            <button type='button' class='btn btn-outline-danger' data-toggle='modal' data-target='#exampleModal' onclick=\"prepararModal('".$obj->getTitulo()."'," . $obj->getId() . ")\">Remover</button>
+                            <button type='button' class='btn btn-outline-warning' onclick=\"window.location='http://" . $_SERVER['HTTP_HOST'] . "/locadora/add-cliente.php?id=" . $obj->getId() . "'\">Editar</button>
+                            <button type='button' class='btn btn-outline-danger' data-toggle='modal' data-target='#exampleModal' onclick=\"prepararModal('".$obj->getNome()."'," . $obj->getId() . ")\">Remover</button>
                             
                         </td>
                     </tr>";

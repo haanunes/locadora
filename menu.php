@@ -26,6 +26,15 @@
                     <a class="dropdown-item" href="<?php echo "http://" . $_SERVER['HTTP_HOST'] . "/locadora/list-usuario.php" ?>">Usuário</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Financeiro
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?php echo "http://" . $_SERVER['HTTP_HOST'] . "/locadora/add-fluxoCaixa.php" ?>">Adicionar Fluxo de Caixa</a>
+                    <a class="dropdown-item" href="<?php echo "http://" . $_SERVER['HTTP_HOST'] . "/locadora/list-fluxoCaixa.php" ?>">Listar Fluxo de Caixa</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
