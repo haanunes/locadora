@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/UsuarioDAO.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/locadora/dao/UsuarioPermissaoDAO.php';
 
 print_r($_POST);
-/*
+
 if (isset($_POST['nome']) && isset($_POST['login']) && isset($_POST['senha'])&& isset($_POST['email'])) {
     $obj = new Usuario();
     $obj->setNome($_POST['nome']);
@@ -38,4 +38,4 @@ if (isset($_POST['nome']) && isset($_POST['login']) && isset($_POST['senha'])&& 
    // header("location:http://" . $_SERVER["HTTP_HOST"] . "/locadora/list-cliente.php");
 } else {
    // header("location:http://" . $_SERVER["HTTP_HOST"] . "/locadora/index.php");
-}      */
+}      
